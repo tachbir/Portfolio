@@ -639,3 +639,10 @@ transition: width .5s ease;
         padding:10px 0;
         margin:0px;
       }
+footer .copyright {
+  margin-top: 10px;
+  text-align: center;
+  color: #c2c0c3;
+  font-size: 14px;
+}
+
