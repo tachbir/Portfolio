@@ -53,8 +53,10 @@
 <p>I like to tell that ,I was patrol leader at Bangladesh Scouts.
 My Hobbies are Riding and Travelling. That’s all.</p>
 <p>
-    <button type="button" class="btn-bg">Download CV</button>
-    <button type="button" class="btn-light">Hire Me</button>
+    <a class="btn-bg" target="_blank" href="https://drive.google.com/file/d/1Crr6kIoMo7jKk7iCzkvCa10ovHR8aGOT/view?usp=drive_link">Download CV</a>
+    
+    <a class="btn-light" target="_blank" href="https://www.linkedin.com/in/tachbir/">HIRE ME</a>
+    <!-- <button type="button" class="btn-light">Hire Me</button> -->
     </p>
 
               </div>
@@ -276,20 +278,22 @@ My Hobbies are Riding and Travelling. That’s all.</p>
           </div>
         </section>
         <!-- contact -->
-        <section class="contact" id="contact">
-          <div class="container">
-            <h2 class="title">Contact Us</h2>
-            <div class="contact-content">
-              <form action="">
-                <input type="text" placeholder="Name"/>
-                <input type="text" placeholder="Email"/>
-                <input type="text" placeholder="Subject"/>
-                <textarea placeholder="Message"></textarea>
-                <button class="btn-light">Send Message</button>
-              </form>
-            </div>
-          </div>
-        </section>
+       <section class="contact" id="contact">
+  <div class="container">
+    <h2 class="title">Contact Us</h2>
+    <div class="contact-content">
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="text" id="subject" placeholder="Subject" required />
+        <textarea id="message" placeholder="Message" required></textarea>
+        <button type="submit" class="btn-light" id="sendMessageBtn">Send Message</button>
+      </form>
+      <!-- Success message (hidden initially) -->
+      <p id="successMessage" style="color: green; display: none;">Message sent successfully!</p>
+    </div>
+  </div>
+</section>
         <!-- footer -->
         <footer>
           <div class="container">
@@ -306,48 +310,65 @@ My Hobbies are Riding and Travelling. That’s all.</p>
                   <span class="fa fa-envelope"></span>
                 </div>
                 <h4>Email</h4>
-                <p>tachbir.dewan@gmail.com</p>
+                <p>tachbirdewan.office@gmail.com</p>
               </div>
               <div class="box">
                 <div class="icon">
                   <span class="fa fa-map-marker"></span>
                 </div>
                 <h4>Location</h4>
-                <p>Gopalgonj,Bangladesh</p>
+                <p>Khulna,Bangladesh</p>
               </div>
             </div>
           <div class="social-links">
             <ul>
-              <li><a href=""><span class="fa fa-facebook"></span></a></li>
+              <li><a href="https://www.facebook.com/tachhbirdewan.office"><span class="fa fa-facebook"></span></a></li>
               <li><a href=""><span class="fa fa-linkedin"></span></a></li>
               <li><a href=""><span class="fa fa-twitter"></span></a></li>
               <li><a href=""><span class="fa fa-instagram"></span></a></li>
           </div>
         </footer>
 <!-- jquery code -->
-
-
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
-$(document).ready(function(){
-  var bottom=$("header").outerHeight();
-  var header=$("header").offset().top + bottom;
-  $(window).scroll(function(){
-    if($(window).scrollTop()>=header){
-      $("header").addClass("sticky")
-    }
-    else{
-      $("header").removeClass("sticky")
-
-    }
-
-  });
-  // navbar active link
-  $(".navbar ul li a").click(function(){
-    $(".navbar ul li a").removeClass("active")
-    $(this).addClass("active");
-  });
-}); 
-
+   (function() {
+       emailjs.init("EiMHhAYeb0k_nsfHR"); // Initialize with your EmailJS User ID
+   })();
 </script>
+<script>
+  $(document).ready(function() {
+    // Sticky Header
+    var bottom = $("header").outerHeight();
+    var header = $("header").offset().top + bottom;
+    
+    $(window).scroll(function() {
+      if ($(window).scrollTop() >= header) {
+        $("header").addClass("sticky");
+      } else {
+        $("header").removeClass("sticky");
+      }
+    });
+
+    // Navbar Active Link
+    $(".navbar ul li a").click(function() {
+      $(".navbar ul li a").removeClass("active");
+      $(this).addClass("active");
+    });
+
+    // Form Submission Logic
+    $('#contactForm').on('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Use EmailJS to send the form data
+      emailjs.sendForm('service_7ncka08', 'template_sti0bm8', this)
+      .then(function() {
+        alert('Message Sent Successfully!');
+      }, function(error) {
+        alert('Failed to send message. Please try again.');
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
